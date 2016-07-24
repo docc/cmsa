@@ -12,20 +12,9 @@ RUN pip install flask
 RUN pip install -U flask-cors
 RUN apt-get -y -q install curl
 
-RUN mkdir -p /home/toptopic /home/toptopic/web
-
-COPY init.sh /home/toptopic/init.sh
-COPY web /home/toptopic/web
-COPY question.txt /home/toptopic/question.txt
-
 COPY nginx/global.conf /etc/nginx/conf.d/
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY mysql/my.cnf /etc/mysql/my.cnf
-
-RUN ln -s /home/toptopic/web/www /usr/share/nginx/html
-
-RUN chmod +x /home/toptopic/init.sh 
-RUN chmod -R 755 /home/toptopic/web
 
 RUN ./etc/init.d/mysql start &&\  
     mysql -e "grant all privileges on *.* to 'root'@'%' identified by 'dbpasswd';"&&\  
