@@ -25,5 +25,3 @@ RUN ./etc/init.d/mysql start &&\
     mysql -e "grant all privileges on *.* to 'root'@'localhost' identified by 'dbpasswd';"
 
 EXPOSE 80
-
-CMD ["/home/toptopic/init.sh"]
